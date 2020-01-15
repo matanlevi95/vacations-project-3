@@ -1,0 +1,96 @@
+.vacation-main-div{
+    -webkit-box-shadow: 3px 13px 33px -1px rgba(0,0,0,0.64);
+    -moz-box-shadow: 3px 13px 33px -1px rgba(0,0,0,0.64);
+    box-shadow: 3px 13px 33px -1px rgba(0,0,0,0.64);
+    width: 350px;
+    height: 500px;
+    margin: 73px;
+    background: rgb(193, 234, 248);
+    display: inline-block;
+    position: relative;
+
+  }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes follow-animation {
+    from {background: white; color: #3399FF; width: 85px;  }
+    to {background: #2EB82E; border-color: #2EB82E; color: #ffffff; width: 120px;margin: 10px; }
+  }
+  @-webkit-keyframes unfollow-animation {
+    from {background: #2EB82E; color: #ffffff; width: 120px; left: 35px;}
+    to {background: white; border-color: #3399FF; color: #3399FF; width: 85px;margin: 10px; }
+  }
+  
+  /* Standard syntax */
+  @keyframes follow-animation {
+    from {background: white; color: #3399FF; width: 85px; }
+    to {background: #2EB82E; border-color: #2EB82E; color: #ffffff; width: 120px; }
+  }
+  @keyframes unfollow-animation {
+    from {background: #2EB82E; color: #ffffff; width: 120px; left: 35px;}
+    to {background: white; border-color: #3399FF; color: #3399FF; width: 85px;}
+  }
+  
+  .follow-box {
+    -webkit-appearance: none;
+  }
+  
+  .follow-box:after {
+    color: #3399FF;
+    font-family: "Helvetica";
+    font-size: 10pt;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #3399FF;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    padding: 5px 15px;
+    content: '+ Follow';
+    -webkit-animation: unfollow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-animation-fill-mode:forwards;
+    animation: unfollow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-fill-mode:forwards;
+  }
+  
+  .follow-box:checked:after {
+    content: 'Following';
+    -webkit-animation: follow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-animation-fill-mode:forwards;
+    animation: follow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-fill-mode:forwards;
+  }	
+
+.follow-div{
+    margin: 10px;
+}
+
+button{
+    margin-left: 5px;
+}
+
+.description-div{
+  overflow: auto;
+   height: 200px
+}
+
+.description-div::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.description-div::-webkit-scrollbar-thumb {
+background-color: rgb(102, 183, 230);
+outline: 1px solid rgb(102, 183, 230);
+}
+
+label{
+  margin-right: 5px;
+  border: 1px solid #3399FF;
+  padding-left: 5px;
+  padding-right: 6px;
+  padding-bottom: 5px;
+  background: white;
+  color: #3399FF;
+}

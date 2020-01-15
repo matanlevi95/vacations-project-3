@@ -1,0 +1,8 @@
+export default {
+    REGISTER: "REGISTER",
+    LOGIN: "LOGIN",
+    LOGOUT: "LOGOUT",
+    GET_VACATIONS: "GET_VACATIONS",
+    INIT:"INIT",
+    ADD_VACATION:"ADD_VACATION"
+}

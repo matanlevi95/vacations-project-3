@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+  height: 100%; 
+  position: fixed;
+  width: 100%;
+  background-size: cover;
+  margin: 0; 
+  overflow: auto;
+  background-image: url("http://www.gannett-cdn.com/media/2019/03/28/USATODAY/usatsports/hammock-on-beach-vacation-philippines.jpg")
+  /* background: #2980B9;   */
+  /* background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);  */
+  /* background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);  */
+
+}
+.App::-webkit-scrollbar {
+  width: 1em;
+}
+
+.App::-webkit-scrollbar-thumb {
+background-color: rgb(102, 183, 230);
+outline: 1px solid rgb(102, 183, 230);
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}

@@ -1,0 +1,46 @@
+.main-div{
+    background: rgb(255, 255, 255);
+    margin: 50px;
+    width: 500px;
+    position: relative;
+    left: 32%;
+    height: 550px;
+    border: 1px solid;
+    border-radius: 10px;
+    -webkit-box-shadow: 3px 13px 33px -1px rgba(0,0,0,0.64);
+    -moz-box-shadow: 3px 13px 33px -1px rgba(0,0,0,0.64);
+    box-shadow: 3px 13px 33px -1px rgba(0,0,0,0.64);
+}
+.review-div{
+    overflow: auto;
+    overflow-x: hidden;
+    height: 200px;
+}
+.review-div::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  .review-div::-webkit-scrollbar-thumb {
+  background-color: rgb(102, 183, 230);
+  outline: 1px solid rgb(102, 183, 230);
+  }
+
+.order-div{
+    height: 450px;
+}
+.successfully-div{
+    margin-top: 200px;
+}
+
+.error-span{
+    color:red;
+}
+.successfully-button{
+    height: 100px;
+    width: 150px;
+    margin: 46.5px;
+}
+
+label{
+    border: none;
+}
