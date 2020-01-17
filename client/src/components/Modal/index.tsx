@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import "./style.css"
 
 // const useStyles = makeStyles((theme: Theme) =>
 //   createStyles({
@@ -20,19 +21,9 @@ import Fade from '@material-ui/core/Fade';
 // );
 
 export default class TransitionsModal extends React.Component<any, any> {
-  state = {
-    open: true
-  }
-
-  componentDidMount() {
-  }
-
-  handleClose = (show: boolean) => {
-
-  }
 
   render() {
-    let show = false
+    const { show, closeModal } = this.props
 
 
     return (
@@ -41,7 +32,7 @@ export default class TransitionsModal extends React.Component<any, any> {
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
           open={show}
-          onClose={this.handleClose}
+          onClose={closeModal}
           closeAfterTransition
           BackdropComponent={Backdrop}
           BackdropProps={{
@@ -49,9 +40,12 @@ export default class TransitionsModal extends React.Component<any, any> {
           }}
         >
           <Fade in={show}>
-            <div>
-              <h2 id="transition-modal-title">Transition modal</h2>
-              <p id="transition-modal-description">react-transition-group animates me.</p>
+            <div className="fadeIn">
+              <h2 id="transition-modal-title">Are you sure you want to delete ?</h2>
+              <div className="fade-in-buttons">
+                <button className="btn btn-primary">Delete</button>
+                <button className="btn btn-primary" onClick={() => closeModal()}>Cancel</button>
+              </div>
             </div>
           </Fade>
         </Modal>

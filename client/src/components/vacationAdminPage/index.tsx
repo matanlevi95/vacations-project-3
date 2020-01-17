@@ -4,20 +4,11 @@ import SimpleImageSlider from "react-simple-image-slider";
 import { connect } from "react-redux"
 import { handleFollow } from "../../redux/actions"
 import Modal from "../Modal"
+import { vacationTypes } from "../../interfaces/index"
 
 
 export interface VacationPageProps {
-    vacation: {
-        id: number,
-        description: String,
-        destination: string,
-        images: Array<any>,
-        check_in: string,
-        check_out: string,
-        price: string,
-        followers_count: number,
-        is_following: any
-    },
+    vacation: vacationTypes
     actions: {
         handleFollow: Function
     }
@@ -33,19 +24,21 @@ class VacationAdminPage extends React.Component<VacationPageProps, VacationPageS
     }
     handleEdit = () => {
         console.log("edit");
+    }
 
+    closeModal = () => {
+        this.setState({ show: false })
     }
 
     handleDelete = () => {
         console.log("delete");
-
     }
 
     render() {
         let { show } = this.state
         let { description, destination, images, check_in, check_out, price, followers_count } = this.props.vacation
         return (<div>
-            <Modal show={show} />
+            <Modal show={show} closeModal={this.closeModal} />
             <div className="vacation-main-div card">
                 <SimpleImageSlider
                     width={350}
@@ -61,10 +54,12 @@ class VacationAdminPage extends React.Component<VacationPageProps, VacationPageS
                     <div className="follow-div">
                         <label>{followers_count}</label>
                         <button className="btn btn-primary" onClick={() => {
-                            this.setState({show:true})
+                            this.setState({ show: true })
                         }}
                         >✏️</button>
-                        <button className="btn btn-danger" onClick={this.handleDelete}>🗑</button>
+                        <button className="btn btn-danger" onClick={() => {
+                            this.setState({ show: true })
+                        }}>🗑</button>
                         <button className="btn btn-success">Order {price}$</button>
                     </div>
                 </div>

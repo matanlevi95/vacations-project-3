@@ -15,6 +15,7 @@ import { connect } from "react-redux"
 import { addVacation } from "../../redux/actions"
 import moment from "moment"
 import { Link } from 'react-router-dom';
+import { vacationTypes } from 'interfaces';
 
 const initialState = {
   activeStep: 0,
@@ -172,7 +173,7 @@ class Checkout extends React.Component<any, any>{
 const mapDispatchToProps = (dispatch: Function) => {
   return {
     actions: {
-      AddVacation: (vacationDetails: Object) => dispatch(addVacation(vacationDetails))
+      AddVacation: (vacationDetails: vacationTypes) => dispatch(addVacation(vacationDetails))
     }
   }
 }

@@ -3,20 +3,11 @@ import "./Style.css"
 import SimpleImageSlider from "react-simple-image-slider";
 import { connect } from "react-redux"
 import { handleFollow } from "../../redux/actions"
+import { vacationTypes } from "interfaces";
 
 
 export interface VacationPageProps {
-    vacation: {
-        id: number,
-        description: String,
-        destination: string,
-        images: Array<any>,
-        check_in: string,
-        check_out: string,
-        price: string,
-        followers_count: number,
-        is_following: any
-    },
+    vacation: vacationTypes,
     actions: {
         handleFollow: Function
     }
@@ -36,20 +27,17 @@ class VacationUserPage extends React.Component<VacationPageProps, VacationPageSt
         this.setState({ checked: is_following })
     }
 
-    handleFollow = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleFollow = async (e: React.ChangeEvent<HTMLInputElement>) => {
         let { checked } = e.target
         const { id } = this.props.vacation
         if (!id) return
         const { handleFollow } = this.props.actions
-        if (!checked) this.setState({ checked: !this.state.checked })
-        else this.setState({ checked: !this.state.checked })
-        handleFollow(id, checked)
+        await handleFollow(id, checked)
+        this.setState({ checked: !this.state.checked })
     }
 
     render() {
-        let { description, destination, images, check_in, check_out, price, followers_count, is_following } = this.props.vacation
-        if (!is_following) is_following = false
-        else is_following = true
+        let { id, description, destination, images, check_in, check_out, price, followers_count, is_following } = this.props.vacation
         return (<div>
             <div className="vacation-main-div card">
                 <SimpleImageSlider

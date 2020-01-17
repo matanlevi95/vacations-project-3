@@ -42,6 +42,8 @@ class Vacations extends React.Component<VacationsPageProps, VacationsPageState> 
 
     render() {
         const { vacations, role } = this.props
+        console.log(vacations);
+        
         return (<div>
             <Header title="Vacations" />
             <div>
@@ -50,7 +52,7 @@ class Vacations extends React.Component<VacationsPageProps, VacationsPageState> 
             <div style={{ display: "flex", flexWrap: "wrap" }} className="col-12">
                 {vacations.map((vacation: any) => {
                     if (role === "admin") return <VacationAdminPage key={vacation.id} vacation={vacation} />
-                    return <VacationUserPage key={vacation.id} vacation={vacation} />
+                    else return <VacationUserPage key={vacation.id} vacation={vacation} />
                 })
                 }
             </div>

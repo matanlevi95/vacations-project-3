@@ -34,8 +34,8 @@ class Login extends React.Component<LoginProps, LoginState> {
         email: "",
         password: ""
     }
-    componentDidMount(){
-        document.title="Login"
+    componentDidMount() {
+        document.title = "Login"
     }
 
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

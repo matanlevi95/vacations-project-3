@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const pool = require("../pool/connection")
-const { register, checkIfUserExists } = require("../queries/queries")
+const { registerQuery, checkIfUserExistsQuery } = require("../queries/queries")
 const hashPassword = require("../utils/hashPassword")
 const jwt = require("jsonwebtoken")
 const registerValidation = require("../validations/registerValidation")
@@ -12,7 +12,7 @@ router.post("/register", registerValidation, async (req, res) => {
     const [userResult] = await pool.execute(checkIfUserExists(), [email])
     const [exists] = userResult
     if (!exists) {
-        await pool.execute(register(), [firstName, lastName, email, hashedPassword])
+        await pool.execute(registerQuery(), [firstName, lastName, email, hashedPassword])
         res.json({ message: "register completed", redirect: true })
     }
     else {
@@ -23,11 +23,8 @@ router.post("/register", registerValidation, async (req, res) => {
 
 router.post("/login", loginValidation, async (req, res) => {
     const { email, password } = req.body
-    console.log("la");
-    
-    const [userResult] = await pool.execute(checkIfUserExists(), [email])
+    const [userResult] = await pool.execute(checkIfUserExistsQuery(), [email])
     const [exists] = userResult
-
     if (exists) {
         const { id, password: userPassword, role, name } = exists
         const compared = await hashPassword.compare(password, userPassword)
@@ -50,7 +47,6 @@ router.post("/login", loginValidation, async (req, res) => {
 
 router.get("/verify", (req, res) => {
     const { token } = req.headers
-
     if (!token) {
         res.send("error")
     }

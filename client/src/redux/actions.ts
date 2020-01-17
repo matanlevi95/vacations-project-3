@@ -6,7 +6,6 @@ export const registerSuccess = (result: object) => {
         type: Actions.REGISTER,
         payload: result
     }
-
 }
 
 export const register = (userDetails: object) => {
@@ -44,7 +43,6 @@ export const getVacationsSuccess = (result: Array<Object>) => {
 }
 
 export const getVacations = () => {
-
     return async (dispatch: Function) => {
         const result = await getVacationsService()
         dispatch(getVacationsSuccess(result))

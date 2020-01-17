@@ -1,0 +1,12 @@
+.fadeIn{
+    position: fixed;
+    left: 35%;
+    top: 50%;
+    background: white;
+}
+.fade-in-buttons{
+    left: 33%;
+    position: relative;
+    width: 33%;
+    border: none;
+}

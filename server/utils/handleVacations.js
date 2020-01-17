@@ -1,25 +1,20 @@
 const moment = require("moment")
 
 module.exports = (array) => {
-    let images = []
-    return array.reduce((p, c) => {
-        let { id, destination, description, check_in, check_out, price, image_url, followers_count, is_following } = c
-        const exists = p.find((vacation) => {
-            return vacation.id === id
-        })
-        images.push({ url: image_url })
-        if (!exists) {
-            check_in = moment(check_in).format("MM/DD/YY")
-            check_out = moment(check_out).format("MM/DD/YY")
-            return [...p, { id, destination, description, check_in, check_out, price, images, followers_count, is_following }]
-        }
-        else {
-            if (images.length === 5) {
-                images = []
+    const result = array.reduce((obj, current) => {
+
+        let { id, image_url, check_out, check_in } = current;
+        image_url = { url: image_url }
+        current.check_in = moment(check_in).format("MM/DD/YY")
+        current.check_out = moment(check_out).format("MM/DD/YY")
+        current.is_following = 1 ? true : false
+        return {
+            ...obj,
+            [id]: {
+                ...current,
+                images: [...((obj[id] && obj[id].images) || []), image_url]
             }
-            return p
-        }
-
-    }, [])
-
+        };
+    }, {})
+    return Object.values(result)
 }

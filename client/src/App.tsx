@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import Navbar from "./components/Navbar"
 import Login from "./components/Login"
@@ -27,6 +27,7 @@ class App extends React.Component<any, any> {
         <BrowserRouter>
           <Navbar />
           <Switch>
+            <Route exact path="/"> <Redirect to="/login" /></Route>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <AppRoutes routes={routes} />
