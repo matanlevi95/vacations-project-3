@@ -54,7 +54,7 @@ class VacationUserPage extends React.Component<VacationPageProps, VacationPageSt
                     <div className="follow-div">
                         <label>{followers_count}</label>
                         <input className="follow-box" type="checkbox" checked={this.state.checked} onChange={this.handleFollow} />
-                        <button className="btn btn-success">Order {price}$</button>
+                        <button className=" order-button btn btn-success">Order {price}$</button>
                     </div>
                 </div>
             </div>

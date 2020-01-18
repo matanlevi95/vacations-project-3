@@ -7,15 +7,20 @@ const registerValidation = require("../validations/registerValidation")
 const loginValidation = require("../validations/loginValidation")
 
 router.post("/register", registerValidation, async (req, res) => {
+    console.log(1);
+    
     const { email, password, firstName, lastName } = req.body
     hashedPassword = await hashPassword.hash(password)
-    const [userResult] = await pool.execute(checkIfUserExists(), [email])
+    const [userResult] = await pool.execute(checkIfUserExistsQuery(), [email])
     const [exists] = userResult
     if (!exists) {
         await pool.execute(registerQuery(), [firstName, lastName, email, hashedPassword])
         res.json({ message: "register completed", redirect: true })
+        console.log("complete");
     }
     else {
+        console.log("exists");
+
         res.json({ message: "email already exists", redirect: false })
     }
 

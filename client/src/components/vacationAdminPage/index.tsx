@@ -3,8 +3,10 @@ import "./Style.css"
 import SimpleImageSlider from "react-simple-image-slider";
 import { connect } from "react-redux"
 import { handleFollow } from "../../redux/actions"
-import Modal from "../Modal"
+import DeleteModal from "../Modal/delete"
+import EditModal from "../Modal/edit"
 import { vacationTypes } from "../../interfaces/index"
+import { Redirect } from "react-router-dom";
 
 
 export interface VacationPageProps {
@@ -12,6 +14,7 @@ export interface VacationPageProps {
     actions: {
         handleFollow: Function
     }
+    edit: any
 }
 
 export interface VacationPageState {
@@ -20,14 +23,15 @@ export interface VacationPageState {
 
 class VacationAdminPage extends React.Component<VacationPageProps, VacationPageState> {
     state = {
-        show: false
+        showDeleteWindow: false,
+        showEditWindow: false
     }
     handleEdit = () => {
         console.log("edit");
     }
 
     closeModal = () => {
-        this.setState({ show: false })
+        this.setState({ showDeleteWindow: false, showEditWindow: false })
     }
 
     handleDelete = () => {
@@ -35,10 +39,11 @@ class VacationAdminPage extends React.Component<VacationPageProps, VacationPageS
     }
 
     render() {
-        let { show } = this.state
-        let { description, destination, images, check_in, check_out, price, followers_count } = this.props.vacation
+        let { showDeleteWindow, showEditWindow } = this.state
+        let { id, description, destination, images, check_in, check_out, price, followers_count } = this.props.vacation
         return (<div>
-            <Modal show={show} closeModal={this.closeModal} />
+            <DeleteModal show={showDeleteWindow} closeModal={this.closeModal} name={destination} vacationId={id} />
+            <EditModal show={showEditWindow} closeModal={this.closeModal} vacationDetails={this.props.vacation} />
             <div className="vacation-main-div card">
                 <SimpleImageSlider
                     width={350}
@@ -53,14 +58,15 @@ class VacationAdminPage extends React.Component<VacationPageProps, VacationPageS
                 <div>
                     <div className="follow-div">
                         <label>{followers_count}</label>
-                        <button className="btn btn-primary" onClick={() => {
-                            this.setState({ show: true })
+                        <button className="edit-button btn btn-primary" onClick={() => {
+                            // this.setState({ showEditWindow: true })
+                            this.props.edit(this.props.vacation)
                         }}
                         >✏️</button>
-                        <button className="btn btn-danger" onClick={() => {
-                            this.setState({ show: true })
+                        <button className="delete-button btn btn-danger" onClick={() => {
+                            this.setState({ showDeleteWindow: true })
                         }}>🗑</button>
-                        <button className="btn btn-success">Order {price}$</button>
+                        <button className="order-button btn btn-success">Order {price}$</button>
                     </div>
                 </div>
             </div>

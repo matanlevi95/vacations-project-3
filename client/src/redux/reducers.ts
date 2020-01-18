@@ -3,7 +3,8 @@ import Actions from "./actions.config";
 const initialState = {
     registerDetails: { message: "", redirect: false },
     loginDetails: { message: "", role: "", name: "" },
-    vacations: []
+    vacations: [],
+    newVacationId: 0
 }
 
 export default function root(state = initialState, action: any) {
@@ -35,13 +36,19 @@ export default function root(state = initialState, action: any) {
                 ...state,
                 vacations: action.payload
             }
-        } 
+        }
         case Actions.INIT: {
             const { loginDetails } = state
             const { name, role } = action.payload
             return {
                 ...state,
                 loginDetails: { ...loginDetails, name, role }
+            }
+        }
+        case Actions.ADD_VACATION: {
+            return {
+                ...state,
+                newVacationId: action.payload
             }
         }
         default: {

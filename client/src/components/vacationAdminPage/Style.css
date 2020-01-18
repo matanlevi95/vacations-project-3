@@ -94,3 +94,21 @@ label{
   background: white;
   color: #3399FF;
 }
+.edit-button{
+  background:rgb(99, 221, 243)
+}
+.edit-button:hover{
+  background:rgb(96, 176, 250)
+}
+
+.delete-button{
+background: rgb(255, 91, 91)
+}
+.delete-button:hover{
+background: rgb(240, 73, 73)
+}
+
+.order-button{
+  background:rgb(38, 199, 38);
+  color: black;
+}

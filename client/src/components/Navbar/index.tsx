@@ -30,9 +30,7 @@ class Navbar extends Component<any, any> {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
-                            <li><button className="btn btn-primary">lala</button></li>
                             <AppLinks routes={routes} />
-
                         </ul>
                         <span className="user-span">{name}</span>
                         {route}

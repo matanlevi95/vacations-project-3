@@ -23,7 +23,7 @@ class vacationsDetails extends React.Component<any, any> {
             <Grid container spacing={10}>
                 <Grid item xs={12} sm={6}>
                     <TextField
-                        style={{ marginLeft: "10px" }}
+                        style={{ marginLeft: "10%" }}
                         required
                         id="destination"
                         name="destination"
@@ -49,7 +49,7 @@ class vacationsDetails extends React.Component<any, any> {
                 <Grid item xs={12} sm={6}>
                     <TextField
                         required
-                        style={{ marginLeft: "10px" }}
+                        style={{ marginLeft: "10%" }}
                         id="checkIn"
                         name="check_in"
                         fullWidth
@@ -77,7 +77,7 @@ class vacationsDetails extends React.Component<any, any> {
                         id="description"
                         name="description"
                         label="Description"
-                        style={{ marginLeft: "10px" }}
+                        style={{ marginLeft: "10%" }}
                         fullWidth
                         rows="6"
                         multiline={true}

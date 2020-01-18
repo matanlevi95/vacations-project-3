@@ -34,7 +34,17 @@
   .follow-box {
     -webkit-appearance: none;
   }
+
+  .order-button{
+    background:rgb(38, 199, 38);
+    color: black;
+  }
   
+  .order-button:hover{
+    background:rgb(18, 170, 18);
+    color: black;
+  }
+
   .follow-box:after {
     color: #3399FF;
     font-family: "Helvetica";

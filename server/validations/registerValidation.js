@@ -9,7 +9,10 @@ const registerSchema = Joi.object({
 
 function registerValidation(req, res, next) {
     const { error } = registerSchema.validate(req.body);
-    if (error) return res.json({ messege: "One of your fields are incorrect", redirect: false })
+    if (error){
+        console.log(error);
+        
+         return res.json({ messege: "One of your fields are incorrect", redirect: false })}
     next();
 }
 module.exports = registerValidation

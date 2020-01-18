@@ -7,14 +7,16 @@ import Header from "../Header";
 import { getVacations } from "../../redux/actions"
 import { Redirect, Link } from "react-router-dom";
 import "./style.css"
+import { vacationTypes } from "../../interfaces"
 
 export interface VacationsPageProps {
-    vacations: Array<Object>
+    vacations: Array<vacationTypes>
     actions: {
         getVacations: Function
     }
     role: String,
     isAdmin: Boolean
+    history: Array<Object>
 }
 
 export interface VacationsPageState {
@@ -39,11 +41,15 @@ class Vacations extends React.Component<VacationsPageProps, VacationsPageState> 
             )
         }
     }
+    handleEdit = (vacationDetails: vacationTypes) => {
+        this.props.history.push({
+            pathname: '/addVacation',
+            state: { vacationDetails }
+        })
+    }
 
     render() {
         const { vacations, role } = this.props
-        console.log(vacations);
-        
         return (<div>
             <Header title="Vacations" />
             <div>
@@ -51,7 +57,7 @@ class Vacations extends React.Component<VacationsPageProps, VacationsPageState> 
             </div>
             <div style={{ display: "flex", flexWrap: "wrap" }} className="col-12">
                 {vacations.map((vacation: any) => {
-                    if (role === "admin") return <VacationAdminPage key={vacation.id} vacation={vacation} />
+                    if (role === "admin") return <VacationAdminPage edit={this.handleEdit} key={vacation.id} vacation={vacation} />
                     else return <VacationUserPage key={vacation.id} vacation={vacation} />
                 })
                 }

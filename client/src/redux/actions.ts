@@ -1,7 +1,10 @@
 import Actions from "./actions.config"
-import { registerService,addVacationService, loginService, getVacationsService, handleFollowService, initService } from "./services"
+import { deleteVacationService, registerService, editVacationService, addVacationService, loginService, getVacationsService, handleFollowService, initService } from "./services"
+import { vacationTypes } from "interfaces";
 
 export const registerSuccess = (result: object) => {
+    console.log("action");
+
     return {
         type: Actions.REGISTER,
         payload: result
@@ -70,9 +73,31 @@ export const init = () => {
     }
 }
 
-export const addVacation = (vacationDetails:Object) => {
+export const addVacationSuccess = (NewVacationId: Number) => {
+    return {
+        type: Actions.ADD_VACATION,
+        payload: NewVacationId
+    }
+}
+
+export const addVacation = (vacationDetails: Object) => {
     return async (dispatch: Function) => {
-    const result = await addVacationService(vacationDetails)      
-    // dispatch(getVacationsSuccess(result))
+        const result = await addVacationService(vacationDetails)
+        dispatch(getVacationsSuccess(result))
+    }
+}
+
+export const deleteVacation = (vacationId: number) => {
+    return async (dispatch: Function) => {
+        const result = await deleteVacationService(vacationId)
+        dispatch(getVacationsSuccess(result))
+    }
+}
+
+export const editVacation = (vacationDetails: object) => {
+    return async (dispatch: Function) => {
+        const result = await editVacationService(vacationDetails)
+        console.log(result);
+
     }
 }

@@ -12,12 +12,13 @@ import VacationImages from './vacationsImages';
 import VacationReview from './vacationReview';
 import VacationPage from "../vacationUserPage"
 import { connect } from "react-redux"
-import { addVacation } from "../../redux/actions"
+import { addVacation, editVacation } from "../../redux/actions"
 import moment from "moment"
 import { Link } from 'react-router-dom';
-import { vacationTypes } from 'interfaces';
+import { vacationTypes, stateTypes } from 'interfaces';
 
 const initialState = {
+  id: "",
   activeStep: 0,
   destination: "",
   price: "",
@@ -29,6 +30,7 @@ const initialState = {
   image3: { url: "" },
   image4: { url: "" },
   image5: { url: "" },
+  confirmMessage: "Add Vacation"
 }
 
 class Checkout extends React.Component<any, any>{
@@ -40,15 +42,37 @@ class Checkout extends React.Component<any, any>{
     const currentDate = moment().format("YYYY-MM-DD")
     this.setState({ check_in: currentDate, check_out: currentDate })
   }
+  componentDidMount() {
+    if (!this.props.location.state) return
+    document.title = "Edit Vacation"
+    const { vacationDetails } = this.props.location.state
+    const { images, check_in, check_out } = vacationDetails
+    vacationDetails.check_in = moment(check_in).format("YYYY-MM-DD")
+    vacationDetails.check_out = moment(check_out).format("YYYY-MM-DD")
+    vacationDetails.mainImage = images[0]
+    if (images[1]) vacationDetails.image2 = images[1]
+    if (images[2]) vacationDetails.image3 = images[2]
+    if (images[3]) vacationDetails.image4 = images[3]
+    if (images[4]) vacationDetails.image5 = images[4]
+    vacationDetails.confirmMessage = "Edit Vacation"
+
+    this.setState(vacationDetails)
+  }
+
 
   handleNext = () => {
-    const { description, destination, check_in, check_out, price, mainImage, image2, image3, image4, image5, activeStep } = this.state
+    const { id, description, destination, check_in, check_out, price, mainImage, image2, image3, image4, image5, activeStep } = this.state
     const currentStep = activeStep + 1
     if (currentStep === 3) {
       let imagesArray = [mainImage, image2, image3, image4, image5].filter((image: any) => {
         if (image.url !== "") return image
       }).map((image: any) => image.url)
-      this.props.actions.AddVacation({ description, destination, check_in, check_out, price, imagesArray })
+      if (this.state.id) {
+        this.props.actions.EditVacation({ id, description, destination, check_in, check_out, price, imagesArray })
+      }
+      else {
+        this.props.actions.AddVacation({ description, destination, check_in, check_out, price, imagesArray })
+      }
     }
 
     this.setState({ activeStep: currentStep, IfError: true });
@@ -111,6 +135,11 @@ class Checkout extends React.Component<any, any>{
   }
 
   render() {
+    const { id } = this.state
+
+    const title = id ? "Vacation is successfully updated" : "Vacation is successfully uploaded"
+    const message = id ? `Vacation number ${id}# is successfully updated and now you can go and check in the vacations` : `Your Vacation is successfully uploaded and now you can go and see it on the vacations`
+
     const { check_in, check_out } = this.state
     if (!check_in || !check_out) {
       this.handleDates()
@@ -136,8 +165,9 @@ class Checkout extends React.Component<any, any>{
               {activeStep === steps.length ? (
                 <React.Fragment>
                   <Typography variant="h5" gutterBottom>
-                    Your vacation is uploaded
-                </Typography>
+                    {title}
+                  </Typography>
+                  <span>{message}</span>
                   <div className="successfully-div">
                     <button className="successfully-button btn btn-primary" onClick={() => this.setState(initialState)}>Add another vacation</button>
                     <button className="successfully-button btn btn-primary"><Link style={{ color: "white" }} to="/vacations">Back to vacations</Link></button>
@@ -158,7 +188,7 @@ class Checkout extends React.Component<any, any>{
                         disabled={error}
                         onClick={this.handleNext}
                       >
-                        {activeStep === steps.length - 1 ? 'Add Vacation' : 'Next'}
+                        {activeStep === steps.length - 1 ? this.state.confirmMessage : 'Next'}
                       </Button>
                     </div>
                   </React.Fragment>
@@ -170,12 +200,18 @@ class Checkout extends React.Component<any, any>{
   }
 }
 
+const mapStateToProps = (state: stateTypes) => {
+  const { newVacationId } = state
+  return { newVacationId }
+}
+
 const mapDispatchToProps = (dispatch: Function) => {
   return {
     actions: {
-      AddVacation: (vacationDetails: vacationTypes) => dispatch(addVacation(vacationDetails))
+      AddVacation: (vacationDetails: vacationTypes) => dispatch(addVacation(vacationDetails)),
+      EditVacation: (vacationDetails: vacationTypes) => dispatch(editVacation(vacationDetails))
     }
   }
 }
 
-export default connect(null, mapDispatchToProps)(Checkout)
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

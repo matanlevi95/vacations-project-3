@@ -1,12 +1,22 @@
 .fadeIn{
     position: fixed;
+    height: 200px;
+    width: 400px;
     left: 35%;
-    top: 50%;
+    top: 30%;
     background: white;
+    -webkit-box-shadow: 3px 13px 33px -1px rgba(0,0,0,0.64);
+    -moz-box-shadow: 3px 13px 33px -1px rgba(0,0,0,0.64);
+    box-shadow: 3px 13px 33px -1px rgba(0,0,0,0.64);
+    text-align: center;
 }
 .fade-in-buttons{
-    left: 33%;
+    left: 29%;
     position: relative;
-    width: 33%;
+    width: 40%;
+    margin: 5px;
     border: none;
+}
+.confirm-message{
+    font-size: 27px;
 }

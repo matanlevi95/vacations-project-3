@@ -43,6 +43,8 @@ class Register extends React.Component<RegisterProps, RegisterState> {
         this.setState({ [name]: value })
     }
     handleRegister = () => {
+        console.log("register");
+        
         const { register } = this.props.actions
         register(this.state)
     }

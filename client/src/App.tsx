@@ -27,7 +27,7 @@ class App extends React.Component<any, any> {
         <BrowserRouter>
           <Navbar />
           <Switch>
-            <Route exact path="/"> <Redirect to="/login" /></Route>
+            <Route exact path="/"> <Redirect to="/vacations" /></Route>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <AppRoutes routes={routes} />
