@@ -14,7 +14,6 @@ export interface VacationPageProps {
 }
 
 export interface VacationPageState {
-
 }
 
 class VacationUserPage extends React.Component<VacationPageProps, VacationPageState> {
@@ -37,7 +36,7 @@ class VacationUserPage extends React.Component<VacationPageProps, VacationPageSt
     }
 
     render() {
-        let { id, description, destination, images, check_in, check_out, price, followers_count, is_following } = this.props.vacation
+        let { description, destination, images, check_in, check_out, price, followers_count, is_following } = this.props.vacation
         return (<div>
             <div className="vacation-main-div card">
                 <SimpleImageSlider

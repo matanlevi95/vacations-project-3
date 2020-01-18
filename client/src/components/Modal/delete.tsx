@@ -6,13 +6,25 @@ import "./style.css"
 import { connect } from 'react-redux';
 import { deleteVacation } from "../../redux/actions"
 
-class DeleteModal extends React.Component<any, any> {
+interface propsTypes {
+  name: string
+  actions: {
+    deleteVacation: Function
+  }
+  vacationId?: Number
+  closeModal: any,
+  show: boolean
+}
+interface stateTypes {
+}
+
+class DeleteModal extends React.Component<propsTypes, stateTypes> {
 
   state = {
     isError: true
   }
 
-  handleChange = (e: any) => {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     const { name: vacationName } = this.props
     if (value.toLocaleLowerCase() === vacationName.toLocaleLowerCase()) {

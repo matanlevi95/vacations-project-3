@@ -4,9 +4,7 @@ import SimpleImageSlider from "react-simple-image-slider";
 import { connect } from "react-redux"
 import { handleFollow } from "../../redux/actions"
 import DeleteModal from "../Modal/delete"
-import EditModal from "../Modal/edit"
 import { vacationTypes } from "../../interfaces/index"
-import { Redirect } from "react-router-dom";
 
 
 export interface VacationPageProps {
@@ -23,27 +21,18 @@ export interface VacationPageState {
 
 class VacationAdminPage extends React.Component<VacationPageProps, VacationPageState> {
     state = {
-        showDeleteWindow: false,
-        showEditWindow: false
-    }
-    handleEdit = () => {
-        console.log("edit");
+        showDeleteWindow: false
     }
 
     closeModal = () => {
-        this.setState({ showDeleteWindow: false, showEditWindow: false })
-    }
-
-    handleDelete = () => {
-        console.log("delete");
+        this.setState({ showDeleteWindow: false })
     }
 
     render() {
-        let { showDeleteWindow, showEditWindow } = this.state
+        let { showDeleteWindow } = this.state
         let { id, description, destination, images, check_in, check_out, price, followers_count } = this.props.vacation
         return (<div>
             <DeleteModal show={showDeleteWindow} closeModal={this.closeModal} name={destination} vacationId={id} />
-            <EditModal show={showEditWindow} closeModal={this.closeModal} vacationDetails={this.props.vacation} />
             <div className="vacation-main-div card">
                 <SimpleImageSlider
                     width={350}
@@ -59,7 +48,6 @@ class VacationAdminPage extends React.Component<VacationPageProps, VacationPageS
                     <div className="follow-div">
                         <label>{followers_count}</label>
                         <button className="edit-button btn btn-primary" onClick={() => {
-                            // this.setState({ showEditWindow: true })
                             this.props.edit(this.props.vacation)
                         }}
                         >✏️</button>

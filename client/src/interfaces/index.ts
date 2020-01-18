@@ -1,6 +1,6 @@
 export interface stateTypes {
     loginDetails: { message: string, name: string, role: string },
-    vacations: Array<object>,
+    vacations: Array<vacationTypes>,
     registerDetails: { message: string, redirect: boolean },
     newVacationId: Number
 }

@@ -8,9 +8,17 @@ import { logout } from '../../redux/actions';
 import { stateTypes } from "../../interfaces/index"
 import "./style.css"
 
+interface navbarProps {
+    name: string
+    actions: {
+        logout: Function
+    }
+}
+interface navbarState {
 
+}
 
-class Navbar extends Component<any, any> {
+class Navbar extends Component<navbarProps, navbarState> {
     state = {
         inputField: "",
         isVerify: false

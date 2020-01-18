@@ -112,9 +112,6 @@ class Login extends React.Component<LoginProps, LoginState> {
         </div>);
     }
 }
-const mapStateToProps = (state: stateTypes) => {
-    return {}
-}
 
 const mapDispatchToProps = (dispatch: Function) => {
     return {
@@ -124,4 +121,4 @@ const mapDispatchToProps = (dispatch: Function) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

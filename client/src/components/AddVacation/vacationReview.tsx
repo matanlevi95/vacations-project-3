@@ -2,14 +2,14 @@ import React from 'react';
 import "./style.css"
 
 export interface AddVacationProps {
-
+    showVacationCard: Function
 }
 
 export interface AddVacationState {
 
 }
 
-class vacationsReview extends React.Component<any, any> {
+class vacationsReview extends React.Component<AddVacationProps, AddVacationState> {
     state = {}
     render() {
         const { showVacationCard } = this.props

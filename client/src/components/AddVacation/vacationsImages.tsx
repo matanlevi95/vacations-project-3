@@ -7,15 +7,23 @@ import Checkbox from '@material-ui/core/Checkbox';
 import "./style.css"
 
 export interface AddVacationProps {
-
+    details: {
+        mainImage: { url: string }
+        image2: { url: string }
+        image3: { url: string }
+        image4: { url: string }
+        image5: { url: string }
+    }
+    handleImagesChange: Function
 }
 
 export interface AddVacationState {
 
 }
 
-class vacationsImages extends React.Component<any, any> {
+class vacationsImages extends React.Component<AddVacationProps, AddVacationState> {
     state = {
+
     }
 
     render() {

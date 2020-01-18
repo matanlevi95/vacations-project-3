@@ -3,16 +3,24 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import "./style.css"
+import { vacationTypes } from 'interfaces';
 
 export interface AddVacationProps {
-
+    details: {
+        destination: string
+        description: string
+        check_in: string
+        check_out: string
+        price: string
+    }
+    handleDetailsChange: Function
 }
 
 export interface AddVacationState {
 
 }
 
-class vacationsDetails extends React.Component<any, any> {
+class vacationsDetails extends React.Component<AddVacationProps, AddVacationState> {
 
     render() {
         const { destination, price, check_in, check_out, description } = this.props.details
