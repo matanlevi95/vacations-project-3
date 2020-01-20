@@ -33,7 +33,22 @@ const initialState = {
   confirmMessage: "Add Vacation"
 }
 
-class Checkout extends React.Component<any, any>{
+interface propsType {
+  location: {
+    state: {
+      vacationDetails: vacationTypes
+    }
+  },
+  actions: {
+    EditVacation: Function,
+    AddVacation: Function
+  }
+}
+interface stateType {
+
+}
+
+class Checkout extends React.Component<propsType, stateType>{
   state = initialState
 
 
@@ -64,9 +79,9 @@ class Checkout extends React.Component<any, any>{
     const { id, description, destination, check_in, check_out, price, mainImage, image2, image3, image4, image5, activeStep } = this.state
     const currentStep = activeStep + 1
     if (currentStep === 3) {
-      let imagesArray = [mainImage, image2, image3, image4, image5].filter((image: any) => {
+      let imagesArray = [mainImage, image2, image3, image4, image5].filter((image: { url: string }) => {
         if (image.url !== "") return image
-      }).map((image: any) => image.url)
+      }).map((image: { url: string }) => image.url)
       if (this.state.id) {
         this.props.actions.EditVacation({ id, description, destination, check_in, check_out, price, imagesArray })
       }
@@ -96,7 +111,7 @@ class Checkout extends React.Component<any, any>{
 
   showVacationCard = () => {
     const { description, destination, check_in, check_out, price, mainImage, image2, image3, image4, image5, activeStep } = this.state
-    let images = [mainImage, image2, image3, image4, image5].filter((image: any) => image.url !== "")
+    let images = [mainImage, image2, image3, image4, image5].filter((image: { url: string }) => image.url !== "")
     const vacation = { description, destination, check_in, check_out, price, images, is_following: false, followers_count: 0, id: 0 }
     return <VacationPage vacation={vacation} />
   }

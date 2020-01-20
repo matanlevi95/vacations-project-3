@@ -2,8 +2,6 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import "./style.css"
 
 export interface AddVacationProps {
@@ -23,13 +21,10 @@ export interface AddVacationState {
 
 class vacationsImages extends React.Component<AddVacationProps, AddVacationState> {
     state = {
-
     }
 
     render() {
         const { mainImage, image2, image3, image4, image5 } = this.props.details
-        console.log(this.props.details);
-
         return (<div className="order-div">
             <Typography variant="h6" gutterBottom>
                 Add Images

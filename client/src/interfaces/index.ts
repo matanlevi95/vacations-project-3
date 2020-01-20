@@ -14,5 +14,12 @@ export interface vacationTypes {
     check_out: string,
     price: string,
     followers_count?: number,
-    is_following?: boolean
+    is_following?: boolean,
+    mainImage?: { url: string },
+    image2?: { url: string },
+    image3?: { url: string },
+    image4?: { url: string },
+    image5?: { url: string },
+    confirmMessage?: string
+
 }
