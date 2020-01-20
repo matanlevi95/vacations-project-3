@@ -1,26 +1,21 @@
 const router = require("express").Router()
 const pool = require("../pool/connection")
-const { registerQuery, checkIfUserExistsQuery } = require("../queries/queries")
+const queries = require("../queries/queries")
 const hashPassword = require("../utils/hashPassword")
 const jwt = require("jsonwebtoken")
 const registerValidation = require("../validations/registerValidation")
 const loginValidation = require("../validations/loginValidation")
 
 router.post("/register", registerValidation, async (req, res) => {
-    console.log(1);
-    
     const { email, password, firstName, lastName } = req.body
     hashedPassword = await hashPassword.hash(password)
-    const [userResult] = await pool.execute(checkIfUserExistsQuery(), [email])
+    const [userResult] = await pool.execute(queries.checkIfUserExistsQuery, [email])
     const [exists] = userResult
     if (!exists) {
-        await pool.execute(registerQuery(), [firstName, lastName, email, hashedPassword])
+        await pool.execute(queries.registerQuery, [firstName, lastName, email, hashedPassword])
         res.json({ message: "register completed", redirect: true })
-        console.log("complete");
     }
     else {
-        console.log("exists");
-
         res.json({ message: "email already exists", redirect: false })
     }
 
@@ -28,7 +23,7 @@ router.post("/register", registerValidation, async (req, res) => {
 
 router.post("/login", loginValidation, async (req, res) => {
     const { email, password } = req.body
-    const [userResult] = await pool.execute(checkIfUserExistsQuery(), [email])
+    const [userResult] = await pool.execute(queries.checkIfUserExistsQuery, [email])
     const [exists] = userResult
     if (exists) {
         const { id, password: userPassword, role, name } = exists

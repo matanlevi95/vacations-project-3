@@ -10,6 +10,7 @@ import "./style.css"
 
 interface navbarProps {
     name: string
+    role: string
     actions: {
         logout: Function
     }
@@ -25,7 +26,7 @@ class Navbar extends Component<navbarProps, navbarState> {
     }
 
     render() {
-        const { name } = this.props
+        const { name, role } = this.props
         const token = localStorage.getItem("token") || ""
         let route = this.checkIfLogin(token)
         return (
@@ -38,7 +39,7 @@ class Navbar extends Component<navbarProps, navbarState> {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
-                            <AppLinks routes={routes} />
+                            <AppLinks routes={routes} role={role} />
                         </ul>
                         <span className="user-span">{name}</span>
                         {route}
@@ -64,9 +65,9 @@ class Navbar extends Component<navbarProps, navbarState> {
 
 
 const mapStateToProps = (state: stateTypes) => {
-    let { name } = state.loginDetails
+    let { name, role } = state.loginDetails
     name = name ? `Hello ${name}` : ""
-    return { name }
+    return { name, role }
 }
 const mapDispatchToProps = (dispatch: Function) => {
     return {

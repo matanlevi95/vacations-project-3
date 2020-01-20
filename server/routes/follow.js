@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const { addFollowQuery, removeFollowQuery, getVacationDetailsQuery } = require("../queries/queries")
+const queries = require("../queries/queries")
 const pool = require("../pool/connection")
 const handleVacations = require("../utils/handleVacations")
 
@@ -8,13 +8,13 @@ router.post("/", async (req, res) => {
     const { id } = req.headers.user
 
     if (checked) {
-        await pool.execute(addFollowQuery(), [vacationId, id])
+        await pool.execute(queries.addFollowQuery, [vacationId, id])
 
     }
     else {
-        await pool.execute(removeFollowQuery(), [vacationId, id])
+        await pool.execute(queries.removeFollowQuery, [vacationId, id])
     }
-    const [result] = await pool.execute(getVacationDetailsQuery(), [id])
+    const [result] = await pool.execute(queries.getVacationDetailsQuery, [id])
     res.json(handleVacations(result))
 })
 

@@ -78,7 +78,7 @@ class Graph extends React.Component<propsTypes, stateType> {
                                     max: 10
                                 }
                             }],
-                            
+
                         }
                     }}
                 />

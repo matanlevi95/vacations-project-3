@@ -9,6 +9,7 @@ import { AppRoutes } from './appRouter/appRouter';
 import { routes } from "./appRouter/router.config"
 import { connect } from 'react-redux';
 import { init } from "./redux/actions"
+import { stateTypes } from 'interfaces';
 
 
 
@@ -20,7 +21,6 @@ class App extends React.Component<any, any> {
   }
 
   render() {
-
     return (
 
       <div className="App">

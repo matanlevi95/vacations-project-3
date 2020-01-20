@@ -32,14 +32,6 @@ class Vacations extends React.Component<VacationsPageProps, VacationsPageState> 
         getVacations()
     }
 
-    displayAddVacation = () => {
-        const { role } = this.props
-        if (role === "admin") {
-            return (
-                <button className="button btn btn-success"> <Link style={{ color: "white" }} to="/addVacation"> Add Vacations </Link></button>
-            )
-        }
-    }
     handleEdit = (vacationDetails: vacationTypes) => {
         this.props.history.push({
             pathname: '/addVacation',
@@ -51,9 +43,6 @@ class Vacations extends React.Component<VacationsPageProps, VacationsPageState> 
         const { vacations, role } = this.props
         return (<div>
             <Header title="Vacations" />
-            <div>
-                {this.displayAddVacation()}
-            </div>
             <div style={{ display: "flex", flexWrap: "wrap" }} className="col-12">
                 {vacations.map((vacation: any) => {
                     if (role === "admin") return <VacationAdminPage edit={this.handleEdit} key={vacation.id} vacation={vacation} />
